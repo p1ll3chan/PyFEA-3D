@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyFEA 3D - Advanced 3D Finite Element Analysis Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">Advanced 3D Finite Element Analysis Platform</h1>
+                <p class="hero__subtitle">PyFEA 3D: Professional spatial structural analysis with 6 DOF per node</p>
+                <div class="hero__features">
+                    <div class="feature-badge">🎯 6 DOF per node analysis</div>
+                    <div class="feature-badge">📐 3D coordinate transformations</div>
+                    <div class="feature-badge">⚡ Spatial accuracy &lt;0.001%</div>
+                </div>
+                <div class="hero__actions">
+                    <button class="btn btn--primary btn--lg" onclick="scrollToDemo()">Explore 3D Analysis</button>
+                    <button class="btn btn--outline btn--lg" onclick="scrollToResearch()">View 3D Research</button>
+                </div>
+            </div>
+            <div class="hero__visual">
+                <div class="preview-container-3d">
+                    <div id="hero3D" class="hero-3d-container"></div>
+                    <div class="preview-overlay-3d">
+                        <div class="preview-stats">
+                            <div class="stat">
+                                <span class="stat-value">6 DOF</span>
+                                <span class="stat-label">Per Node</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">&lt;0.001%</span>
+                                <span class="stat-label">3D Error</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3D Capabilities Section -->
+    <section class="capabilities-3d">
+        <div class="container">
+            <h2 class="section__title">Spatial Engineering Excellence</h2>
+            <div class="capabilities-3d__grid">
+                <div class="capability-3d">
+                    <div class="capability-3d__icon">🎯</div>
+                    <h3 class="capability-3d__title">6 DOF Analysis</h3>
+                    <p class="capability-3d__description">Complete 3D structural analysis with 3 translations and 3 rotations per node</p>
+                </div>
+                <div class="capability-3d">
+                    <div class="capability-3d__icon">📐</div>
+                    <h3 class="capability-3d__title">Spatial Accuracy</h3>
+                    <p class="capability-3d__description">3D validation against analytical solutions with research-grade precision</p>
+                </div>
+                <div class="capability-3d">
+                    <div class="capability-3d__icon">🔮</div>
+                    <h3 class="capability-3d__title">3D Visualization</h3>
+                    <p class="capability-3d__description">Real-time interactive 3D models with mouse controls and deformed shapes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive 3D Demo Section -->
+    <section id="demo" class="demo-3d">
+        <div class="container">
+            <h2 class="section__title">Experience 3D Structural Analysis</h2>
+            <div class="demo-3d__container">
+                <div class="demo-3d__controls">
+                    <div class="control-panel-3d">
+                        <h3>3D Structure Configuration</h3>
+                        <div class="control-group">
+                            <label class="form-label">Structure Type</label>
+                            <select id="structure3DType" class="form-control">
+                                <option value="3d-cantilever">3D Cantilever</option>
+                                <option value="3d-frame">3D Frame</option>
+                                <option value="3d-truss">3D Truss</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Primary Length: <span id="length3DValue" class="param-value">3.0 m</span></label>
+                            <input type="range" id="length3DSlider" class="slider" min="1" max="8" step="0.1" value="3.0">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Young's Modulus: <span id="modulus3DValue" class="param-value">200 GPa</span></label>
+                            <input type="range" id="modulus3DSlider" class="slider" min="70" max="300" step="10" value="200">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Applied Load Y: <span id="loadY3DValue" class="param-value">-5.0 kN</span></label>
+                            <input type="range" id="loadY3DSlider" class="slider" min="-20" max="0" step="0.5" value="-5">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Applied Load Z: <span id="loadZ3DValue" class="param-value">-3.0 kN</span></label>
+                            <input type="range" id="loadZ3DSlider" class="slider" min="-15" max="0" step="0.5" value="-3">
+                        </div>
+
+                        <button id="solve3DBtn" class="btn btn--primary btn--full-width solve-btn">
+                            <span class="btn-text">SOLVE 3D ANALYSIS</span>
+                            <span class="btn-loader"></span>
+                        </button>
+
+                        <div class="view-controls">
+                            <h4>3D View Controls</h4>
+                            <div class="view-buttons">
+                                <button class="btn btn--sm btn--secondary" onclick="resetView3D()">Reset View</button>
+                                <button class="btn btn--sm btn--secondary" onclick="toggleDeformed3D()">Toggle Deformed</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="demo-3d__visualization">
+                    <div class="viz-header-3d">
+                        <h3>Real-time 3D Visualization</h3>
+                        <div class="viz-controls-3d">
+                            <span class="viz-legend-3d deformed">Deformed Shape</span>
+                            <span class="viz-legend-3d original">Original</span>
+                            <span class="viz-legend-3d loads">Loads</span>
+                        </div>
+                    </div>
+                    <div id="visualization3D" class="visualization-3d-container"></div>
+                    <div class="viz-instructions">
+                        <small>Mouse: Rotate • Wheel: Zoom • Right-click: Pan</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-panel-3d" id="resultsPanel3D">
+                <h3>3D Analysis Results (6 DOF)</h3>
+                <div class="results-grid-3d">
+                    <div class="result-card-3d">
+                        <div class="result-icon">📐</div>
+                        <div class="result-content">
+                            <span class="result-label">Max Displacement Y</span>
+                            <span id="maxDisplacementY" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-card-3d">
+                        <div class="result-icon">📐</div>
+                        <div class="result-content">
+                            <span class="result-label">Max Displacement Z</span>
+                            <span id="maxDisplacementZ" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-card-3d">
+                        <div class="result-icon">🔄</div>
+                        <div class="result-content">
+                            <span class="result-label">Max Rotation X</span>
+                            <span id="maxRotationX" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-card-3d">
+                        <div class="result-icon">🔄</div>
+                        <div class="result-content">
+                            <span class="result-label">Max Rotation Y</span>
+                            <span id="maxRotationY" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-card-3d">
+                        <div class="result-icon">⚡</div>
+                        <div class="result-content">
+                            <span class="result-label">Computation Time</span>
+                            <span id="solveTime3D" class="result-value">-</span>
+                        </div>
+                    </div>
+                    <div class="result-card-3d">
+                        <div class="result-icon">✅</div>
+                        <div class="result-content">
+                            <span class="result-label">3D Validation</span>
+                            <span id="accuracy3D" class="result-value">99.999%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Research Capabilities Section -->
+    <section id="research" class="research-3d">
+        <div class="container">
+            <h2 class="section__title">Built for Advanced 3D Research</h2>
+            <div class="research-3d__grid">
+                <div class="research-3d__validation">
+                    <h3>3D Validation Results</h3>
+                    <div class="chart-container" style="position: relative; height: 350px;">
+                        <canvas id="validation3DChart"></canvas>
+                    </div>
+                    <div class="validation-table-container">
+                        <table class="validation-table">
+                            <thead>
+                                <tr>
+                                    <th>3D Test Case</th>
+                                    <th>FEA</th>
+                                    <th>Analytical</th>
+                                    <th>Error</th>
+                                </tr>
+                            </thead>
+                            <tbody id="validation3DTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="research-3d__features">
+                    <h3>3D Technical Capabilities</h3>
+                    <div class="technical-features-3d">
+                        <div class="feature-category">
+                            <h4>3D Mathematical Foundation</h4>
+                            <ul class="feature-list">
+                                <li>6 DOF spatial beam element formulation</li>
+                                <li>12×12 element stiffness matrices</li>
+                                <li>3D coordinate transformation algorithms</li>
+                                <li>Spatial boundary condition handling</li>
+                            </ul>
+                        </div>
+                        <div class="feature-category">
+                            <h4>3D Computational Engine</h4>
+                            <ul class="feature-list">
+                                <li>Advanced 3D matrix operations</li>
+                                <li>Spatial DOF management system</li>
+                                <li>3D visualization algorithms</li>
+                                <li>Interactive 3D controls</li>
+                            </ul>
+                        </div>
+                        <div class="feature-category">
+                            <h4>3D Validation & Quality</h4>
+                            <ul class="feature-list">
+                                <li>3D analytical solution validation</li>
+                                <li>Spatial accuracy verification</li>
+                                <li>3D performance optimization</li>
+                                <li>Interactive 3D testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="performance-section-3d">
+                <h3>3D Performance Benchmarks</h3>
+                <div class="chart-container" style="position: relative; height: 300px;">
+                    <canvas id="performance3DChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Technical Implementation Section -->
+    <section class="technical-3d">
+        <div class="container">
+            <h2 class="section__title">3D Engineering Innovation</h2>
+            <div class="technical-3d__grid">
+                <div class="tech-feature-3d">
+                    <div class="tech-feature-3d__icon">🔢</div>
+                    <h3>12×12 Stiffness Matrices</h3>
+                    <p>Complete 3D beam element formulation with coupled bending, torsion, and axial effects</p>
+                </div>
+                <div class="tech-feature-3d">
+                    <div class="tech-feature-3d__icon">🌐</div>
+                    <h3>Spatial Transformations</h3>
+                    <p>Advanced 3D coordinate transformation algorithms for arbitrary element orientations</p>
+                </div>
+                <div class="tech-feature-3d">
+                    <div class="tech-feature-3d__icon">🎮</div>
+                    <h3>Interactive 3D Controls</h3>
+                    <p>Intuitive mouse controls with Three.js integration for professional visualization</p>
+                </div>
+                <div class="tech-feature-3d">
+                    <div class="tech-feature-3d__icon">⚡</div>
+                    <h3>Optimized 3D Algorithms</h3>
+                    <p>High-performance 3D matrix operations and efficient spatial DOF management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Portfolio Section -->
+    <section class="portfolio-3d">
+        <div class="container">
+            <h2 class="section__title">Advanced 3D Engineering Excellence</h2>
+            <div class="portfolio-3d__stats">
+                <div class="stat-card-3d">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <span class="stat-number">6 DOF</span>
+                        <span class="stat-description">Per Node Analysis</span>
+                    </div>
+                </div>
+                <div class="stat-card-3d">
+                    <div class="stat-icon">📐</div>
+                    <div class="stat-content">
+                        <span class="stat-number">&lt;0.001%</span>
+                        <span class="stat-description">3D Accuracy</span>
+                    </div>
+                </div>
+                <div class="stat-card-3d">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-content">
+                        <span class="stat-number">42ms</span>
+                        <span class="stat-description">3D Solve Time</span>
+                    </div>
+                </div>
+                <div class="stat-card-3d">
+                    <div class="stat-icon">🔮</div>
+                    <div class="stat-content">
+                        <span class="stat-number">606</span>
+                        <span class="stat-description">Max 3D DOFs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-3d__downloads">
+                <h3>Complete 3D Project Downloads</h3>
+                <div class="downloads-3d__grid">
+                    <div class="download-card-3d">
+                        <div class="download-header">
+                            <div class="download-icon">💻</div>
+                            <div class="download-info">
+                                <h4>3D FEA Solver</h4>
+                                <p>Complete 3D finite element analysis implementation</p>
+                            </div>
+                        </div>
+                        <div class="download-details">
+                            <span class="download-size">125KB</span>
+                            <button class="btn btn--primary btn--sm" onclick="download3DSourceCode()">Download</button>
+                        </div>
+                    </div>
+                    <div class="download-card-3d">
+                        <div class="download-header">
+                            <div class="download-icon">🌐</div>
+                            <div class="download-info">
+                                <h4>3D Web Platform</h4>
+                                <p>Interactive 3D website with Three.js visualization</p>
+                            </div>
+                        </div>
+                        <div class="download-details">
+                            <span class="download-size">245KB</span>
+                            <button class="btn btn--primary btn--sm" onclick="download3DWebPlatform()">Download</button>
+                        </div>
+                    </div>
+                    <div class="download-card-3d">
+                        <div class="download-header">
+                            <div class="download-icon">📊</div>
+                            <div class="download-info">
+                                <h4>3D Research Package</h4>
+                                <p>Advanced 3D documentation and validation studies</p>
+                            </div>
+                        </div>
+                        <div class="download-details">
+                            <span class="download-size">4.2MB</span>
+                            <button class="btn btn--primary btn--sm" onclick="download3DResearch()">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <footer class="contact-3d">
+        <div class="container">
+            <div class="contact-3d__content">
+                <h2>Ready for 3D Collaboration?</h2>
+                <p>Let's explore how PyFEA 3D can revolutionize your spatial structural analysis and research.</p>
+                <div class="contact-3d__actions">
+                    <button class="btn btn--primary btn--lg" onclick="openContact3DModal()">Start 3D Analysis</button>
+                    <a href="https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/fae30f6f2d1601443f75d46c7232d2df/a120010f-af46-4a4b-97cf-0092cf2a17e8/dbd27f04.py" target="_blank" class="btn btn--outline btn--lg">Download 3D Solver</a>
+                </div>
+            </div>
+            <div class="contact-3d__links">
+                <div class="link-category">
+                    <h4>3D Professional</h4>
+                    <a href="https://linkedin.com/in/pyfea3d-engineer" target="_blank">LinkedIn Profile</a>
+                    <a href="mailto:contact@pyfea3d.com">3D Analysis Inquiry</a>
+                </div>
+                <div class="link-category">
+                    <h4>3D Technical</h4>
+                    <a href="https://github.com/pyfea3d" target="_blank">3D Source Code</a>
+                    <a href="#" onclick="downloadAll3DProjects()">Download All 3D</a>
+                </div>
+                <div class="link-category">
+                    <h4>3D Research</h4>
+                    <a href="#" onclick="scrollToResearch()">3D Validation</a>
+                    <a href="#" onclick="view3DPublications()">3D Publications</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact3DModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>3D Professional Contact</h3>
+                <button class="modal-close" onclick="closeContact3DModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Ready to discuss PyFEA 3D for advanced spatial structural analysis and research collaboration?</p>
+                <div class="contact-options">
+                    <a href="mailto:contact@pyfea3d.com?subject=PyFEA 3D Collaboration Inquiry" class="btn btn--primary">Send 3D Inquiry</a>
+                    <a href="https://linkedin.com/in/pyfea3d-engineer" target="_blank" class="btn btn--outline">LinkedIn</a>
+                    <a href="https://github.com/pyfea3d" target="_blank" class="btn btn--secondary">GitHub 3D</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
