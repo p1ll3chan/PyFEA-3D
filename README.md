@@ -11,7 +11,7 @@
 ## 🌟 **Live Demonstrations**
 
 ### **🎯 2D/1D FEA Platform**
-**Interactive Demo**: [PyFEA 2D Platform](https://ppl-ai-code-interpreter-files.s3.amazonaws.com/web/direct-files/fe65c5219a03651e65de791f3e630c9a/a577d9dc-ea1f-4efd-8d25-867cf8abb4e6/index.html)
+**Interactive Demo**: [PyFEA 2D Platform](https://py-fea-2-d.vercel.app)
 
 ### **🚀 Advanced 3D FEA Platform**
 **Interactive Demo**: [PyFEA 3D Platform](https://py-fea-3-d.vercel.app)
