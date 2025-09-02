@@ -6,7 +6,7 @@ A comprehensive 3D finite element analysis implementation for spatial beam and f
 This advanced solver handles 6 degrees of freedom per node (3 translations + 3 rotations)
 and demonstrates cutting-edge computational methods for 3D structural analysis.
 
-Author: [Your Name]
+Author: Abhijith R Pillai
 Date: August 2025
 Version: 2.0.0
 
