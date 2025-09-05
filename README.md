@@ -10,10 +10,6 @@
 
 ## 🌟 **Live Demonstrations**
 
-### **🎯 2D/1D FEA Platform**
-**Interactive Demo**: [PyFEA 2D Platform](https://py-fea-2-d.vercel.app)
-
-### **🚀 Advanced 3D FEA Platform**
 **Interactive Demo**: [PyFEA 3D Platform](https://py-fea-3-d.vercel.app)
 
 ---
