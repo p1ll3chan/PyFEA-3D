@@ -422,13 +422,6 @@ We welcome contributions from the engineering and computational mechanics commun
 
 ---
 
-## 📞 **Contact & Support**
-
-### **Professional Contact**
-- **LinkedIn**: [Your Professional Profile](https://linkedin.com/in/yourprofile)
-- **Email**: your.engineering.email@example.com
-- **Portfolio**: [Your Engineering Portfolio](https://yourportfolio.com)
-
 ### **Project Support**
 - **Issues**: Use GitHub Issues for bug reports and feature requests  
 - **Discussions**: GitHub Discussions for questions and ideas
